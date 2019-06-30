@@ -1,6 +1,7 @@
 (ns user
   (:require [clojure.tools.namespace.repl :refer [refresh refresh-all]]
-            [clojure.test :refer [run-all-tests]]))
+            [clojure.test :refer [run-all-tests]]
+            [codebreaker.cli :as cli]))
 
 (defn run-tests
   []

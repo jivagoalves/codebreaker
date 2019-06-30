@@ -33,3 +33,7 @@
   `(testing (str "\n  Then " ~message)
      ~@body))
 
+(defmacro And
+  [message & body]
+  `(testing (str "\n  And " ~message)
+     ~@body))
