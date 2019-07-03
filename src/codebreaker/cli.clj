@@ -1,23 +1,20 @@
-(ns codebreaker.cli)
+(ns codebreaker.cli
+  (:require [codebreaker.core :refer :all]))
 
-(defn- exceeded-attempts?
-  [attempt]
-  (< 8 attempt))
+(defn- prompt []
+  (print "> ")
+  (flush))
+
+(defn- ask-for-guess []
+  (prompt)
+  (read-line))
 
 (defn start
-  ([]
-   (start nil))
-  ([{:as game
-     :keys [code]}]
-   (println "Welcome!")
-   (when game
-     (loop [attempt 1]
-       (if-not (exceeded-attempts? attempt)
-         (do
-           (print "> ")
-           (flush)
-           (when-let [guess (read-line)]
-             (if (= code guess)
-               (println "You won!")
-               (recur (inc attempt)))))
-         (println "You lost!"))))))
+  [game]
+  (println "Welcome!")
+  (loop [current-game game]
+    (cond
+      (won? current-game) (println "You won!")
+      (game-over? current-game) (println "You lost!")
+      :else (when-let [guess (ask-for-guess)]
+              (recur (play-game current-game guess))))))

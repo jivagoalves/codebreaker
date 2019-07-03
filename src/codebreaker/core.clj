@@ -1,16 +1,25 @@
 (ns codebreaker.core
   (:gen-class))
 
-(defn check
-  [code guess])
+(def MAX-ATTEMPTS 8)
 
 (defn new-game
   [code]
-  {:code code})
+  {:code code
+   :attempt-count 1})
 
-(defn play
-  [game])
+(defn won?
+  [{code :code
+    guess :guess}]
+  (= code guess))
 
-(defn last-message
-  [game]
-  "Welcome!")
+(defn game-over?
+  [{attempt-count :attempt-count}]
+  (< MAX-ATTEMPTS attempt-count))
+
+(defn play-game
+  [game guess]
+  (-> game
+      (assoc :guess guess)
+      (update :attempt-count inc)))
+
