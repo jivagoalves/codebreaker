@@ -1,4 +1,4 @@
-(ns features
+(ns features.player-plays-a-game
   (:require [clojure.test :refer :all]
             [support :refer :all]
             [clojure.string :as s]
@@ -47,17 +47,35 @@
 
         (When "the player can't break the code after 8 attempts"
           (let [out (with-out-str
-                      (with-in-str (s/join (take 8 (repeat "RRRRR\n")))
+                      (with-in-str (s/join (take 8 (repeat "BBBBB\n")))
                         (cli/start game)))]
 
             (Then "the player sees 'You lost!' after seeing the prompt 8 times"
               (is (= "> > > > > > > > You lost!" (last (lines out))))))))))
 
-  #_(Scenario "Player attempts to break the code"
+  (Scenario "Player attempts to break the code"
     (Given "a new game with a code"
-      (let [code "ROYGP"
+      (let [code "RPPPP"
             game (new-game code)]
 
         (When "the player places marbles in the right position"
-          (Then "the player sees an 'O' for each correct marble"
-              ))))))
+          (let [out (with-out-str
+                      (with-in-str "RBBBB\n"
+                        (cli/start game)))]
+
+            (Then "the player sees an 'O' for each correct marble"
+              (let [[_welcome prompt-and-mark] (lines out)]
+                (is (= "> O" prompt-and-mark))))))))
+
+    (Given "a new game with a code"
+      (let [code "PRPPP"
+            game (new-game code)]
+
+        (When "the player places marbles that are present in the code"
+          (let [out (with-out-str
+                      (with-in-str "RBBBB\n"
+                        (cli/start game)))]
+
+            (Then "the player sees an 'X' for each marble present"
+              (let [[_welcome prompt-and-mark] (lines out)]
+                (is (= "> X" prompt-and-mark))))))))))

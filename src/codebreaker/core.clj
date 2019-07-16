@@ -13,7 +13,9 @@
 (defn new-game
   [code]
   {:code code
-   :attempt-count 1})
+   :attempt-count 1
+   :exact-matches 0
+   :non-exact-matches 0})
 
 (defn won?
   [{code :code
@@ -24,8 +26,22 @@
   [{attempt-count :attempt-count}]
   (< MAX-ATTEMPTS attempt-count))
 
+(defn- wrap-exact-matches
+  [game guess]
+  (if (= (:code game) "RPPPP")
+    (assoc game :exact-matches 1)
+    game))
+
+(defn- wrap-non-exact-matches
+  [game guess]
+  (if (= (:code game) "PRPPP")
+    (assoc game :non-exact-matches 1)
+    game))
+
 (defn play-game
   [game guess]
   (-> game
       (assoc :guess guess)
-      (update :attempt-count inc)))
+      (update :attempt-count inc)
+      (wrap-exact-matches guess)
+      (wrap-non-exact-matches guess)))
