@@ -4,6 +4,7 @@
 
 (defn run-tests
   []
-  (refresh-all)
-  (run-all-tests #"^.*feature.*$")
-  (run-all-tests #"^codebreaker.*test$"))
+  (let [result (refresh-all)]
+    (if (= result :ok)
+      (run-all-tests #"^.*feature.*$")
+      result)))

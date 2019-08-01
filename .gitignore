@@ -1,6 +1,7 @@
 /target
 /classes
 /checkouts
+/logs
 profiles.clj
 pom.xml
 pom.xml.asc

@@ -15,7 +15,7 @@
 
 (defmacro Scenario
   [message & body]
-  `(testing (str "\n Scenario " ~message)
+  `(testing (str "\n Scenario: " ~message)
      ~@body))
 
 (defmacro Given
