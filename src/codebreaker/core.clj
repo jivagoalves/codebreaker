@@ -5,17 +5,15 @@
 
 (def MAX-ATTEMPTS 8)
 
-(defn- gen-code
+(defn gen-code
   []
   (let [random-colors (take 5 (shuffle AVAILABLE-COLORS))]
     (apply str random-colors)))
 
 (defn new-game
-  ([]
-   (new-game (gen-code)))
-  ([code]
+  [code]
   {:code code
-   :attempt-count 1}))
+   :attempt-count 1})
 
 (defn won?
   [{code :code
