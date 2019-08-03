@@ -1,7 +1,6 @@
 (ns codebreaker.core
   (:require [clojure.string :as s]
-            [clojure.set :refer [intersection]])
-  )
+            [clojure.set :refer [intersection]]))
 
 (def AVAILABLE-COLORS
   #{"R" "B" "G" "O" "P" "Y" "M" "W"})
@@ -30,33 +29,29 @@
   (< MAX-ATTEMPTS attempt-count))
 
 (defn- count-all-matches
-  [code guess]
+  [{:keys [code guess]}]
   (let [matches (intersection (set code) (set guess))]
     (count matches)))
 
-(defn- count-exact-matches
-  [code guess]
+(defn count-exact-matches
+  [{:keys [code guess]}]
   (let [bool->number {true 1
                       false 0}]
     (->> (map (comp bool->number =) code guess)
          (reduce +))))
 
-(defn- wrap-exact-matches
-  [{:as game :keys [code]} guess]
-  (let [exact-matches (count-exact-matches code guess)]
-    (assoc game :exact-matches exact-matches)))
+(defn count-non-exact-matches
+  [game]
+  (let [all-matches (count-all-matches game)
+        exact-matches (count-exact-matches game)]
+    (- all-matches exact-matches)))
 
-(defn- wrap-non-exact-matches
-  [{:as game :keys [code]} guess]
-  (let [all-matches (count-all-matches code guess)
-        exact-matches (count-exact-matches code guess)
-        non-exact-matches (- all-matches exact-matches)]
-    (assoc game :non-exact-matches non-exact-matches)))
+(defn any-matches?
+  [game]
+  (not (zero? (count-all-matches game))))
 
 (defn play-game
   [game guess]
   (-> game
       (assoc :guess guess)
-      (update :attempt-count inc)
-      (wrap-exact-matches guess)
-      (wrap-non-exact-matches guess)))
+      (update :attempt-count inc)))
