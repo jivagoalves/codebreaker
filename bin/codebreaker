@@ -1,0 +1,5 @@
+#!/bin/sh
+
+SCRIPTDIR="$(dirname "$0")"
+
+java -jar $SCRIPTDIR/../target/uberjar/codebreaker-0.1.0-SNAPSHOT-standalone.jar
