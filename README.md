@@ -1,36 +1,47 @@
 # codebreaker
 
-FIXME: description
+Implementation of the Code Breaker game in Clojure presented in [docs/GFOS.pdf](doc/GFOS.pdf).
 
 ## Installation
 
-Download from http://example.com/FIXME.
+You'll need JDK 8 and [Leiningen](https://leiningen.org).
 
 ## Usage
 
-FIXME: explanation
-
-    $ java -jar codebreaker-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
+Build and run it:
+```
+$ lein uberjar
+$ bin/codebreaker
+```
 
 ## Examples
 
-...
+```
+$ bin/codebreaker
+Welcome!
+> RRRRR
+O
+> BBBBB
+> GGGGG
+O
+> RGYYY
+XXX
+> YRGYY
+XXX
+> YYRGY
+OXX
+> YYGRY
+OOX
+> MWGRY
+OXX
+You lost!
+Secret was PYORG!
+```
 
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
 
 ## License
 
-Copyright © 2019 FIXME
+Copyright © 2019 Jivago Alves
 
 This program and the accompanying materials are made available under the
 terms of the Eclipse Public License 2.0 which is available at
