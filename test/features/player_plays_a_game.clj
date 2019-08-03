@@ -38,7 +38,7 @@
                         (cli/start game)))]
 
             (Then "the player sees a congratulation message after prompt"
-              (is (= "> You won!" (last (lines out))))))))))
+              (is (= "You won!" (last (lines out))))))))))
 
   (Scenario "Player loses the game"
     (Given "a new game with a code"

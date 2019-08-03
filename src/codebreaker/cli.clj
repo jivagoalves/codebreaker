@@ -9,20 +9,23 @@
   (prompt)
   (read-line))
 
+(defn- print-marking
+  [{:keys [exact-matches
+           non-exact-matches]}]
+  (when (or (not (zero? exact-matches))
+            (not (zero? non-exact-matches)))
+    (dotimes [_ exact-matches] (print "O"))
+    (dotimes [_ non-exact-matches] (print "X"))
+    (println)
+    (flush)))
+
 (defn start
   [game]
   (println "Welcome!")
   (loop [{:as current-game
           :keys [exact-matches
                  non-exact-matches]} game]
-
-    (when (or (not (zero? exact-matches))
-              (not (zero? non-exact-matches)))
-      (dotimes [_ exact-matches]
-        (print "O"))
-      (dotimes [_ non-exact-matches]
-        (print "X"))
-      (println))
+    (print-marking current-game)
 
     (cond
       (won? current-game) (println "You won!")

@@ -8,5 +8,5 @@
   []
   (let [result (refresh-all)]
     (if (= result :ok)
-      (run-all-tests #"^.*feature.*$")
+      (run-all-tests #"(^.*feature.*$)|(^.*-test$)")
       result)))
