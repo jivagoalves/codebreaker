@@ -15,9 +15,7 @@
 (defn new-game
   [code]
   {:code code
-   :attempt-count 1
-   :exact-matches 0
-   :non-exact-matches 0})
+   :attempt-count 1})
 
 (defn won?
   [{code :code
