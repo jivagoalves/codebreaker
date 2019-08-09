@@ -1,6 +1,6 @@
 # codebreaker
 
-Implementation of the Code Breaker game in Clojure presented in [doc/Growing Function-Oriented Software.pdf](doc/Growing Function-Oriented Software.pdf).
+Implementation of the Code Breaker game in Clojure presented in [doc/Growing Function-Oriented Software.pdf](https://github.com/jivagoalves/codebreaker/blob/master/doc/Growing%20Function-Oriented%20Software.pdf).
 
 ## Installation
 
