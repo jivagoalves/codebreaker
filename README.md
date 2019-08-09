@@ -1,6 +1,6 @@
 # codebreaker
 
-Implementation of the Code Breaker game in Clojure presented in [docs/GFOS.pdf](doc/GFOS.pdf).
+Implementation of the Code Breaker game in Clojure presented in [doc/GFOS.pdf](doc/GFOS.pdf).
 
 ## Installation
 
